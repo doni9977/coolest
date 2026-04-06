@@ -528,6 +528,12 @@ canvas {
   height: 100%;
   object-fit: cover;
 }
+.mobile-scroll-video {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .cards-container {
   position: absolute;
   inset: 0;
@@ -1102,9 +1108,16 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   .mock-row { gap: 0.65rem; padding: 0.7rem; }
   .m-badge { width: 92px; font-size: 0.56rem; padding: 3px 6px; }
   .m-pct { font-size: 0.74rem; min-width: 28px; }
-  .scroll-container { height: 190vh; }
+  .scroll-container { height: 120vh; }
   .sticky-wrapper::after {
     display: none;
+  }
+  #video-canvas,
+  .cards-container {
+    display: none;
+  }
+  .mobile-scroll-video {
+    display: block;
   }
   .cards-container { z-index: 2; }
   .annotation-card,
@@ -1221,7 +1234,7 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   .btn-dark, .btn-light { width: 100%; text-align: center; }
   .mock-video { height: 138px; }
   .hero-stats { grid-template-columns: 1fr; }
-  .scroll-container { height: 170vh; }
+  .scroll-container { height: 105vh; }
   .section-title { letter-spacing: -0.6px; font-size: 1.7rem; }
   .section-sub { font-size: 0.98rem; }
   .feature-card,
@@ -1355,6 +1368,7 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 <div class="scroll-container" id="animation-trigger">
   <div class="sticky-wrapper">
     <canvas id="video-canvas"></canvas>
+    <video class="mobile-scroll-video" autoplay muted loop playsinline preload="metadata" src="hf_20260405_183155_b8da9f2b-6dc9-4aa5-bfc7-ba83246f05d0.mp4"></video>
     <div class="cards-container">
       <div class="annotation-card" id="card-1">
         <h3>Ранний сигнал</h3>
@@ -1634,6 +1648,7 @@ const frames = [];
 let loadedFrames = 0;
 const progressEl = document.getElementById('progress');
 const loaderEl = document.getElementById('loader');
+const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
 function resizeCanvas() {
   canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -2008,28 +2023,30 @@ const cloudinaryUrls = [
 window.addEventListener('resize', resizeCanvas);
 const frameCount = cloudinaryUrls.length;
 
-for (let i = 0; i < frameCount; i++) {
-  const img = new Image();
-  img.src = cloudinaryUrls[i];
-  img.onload = () => {
-    loadedFrames++;
-    if (progressEl) {
-      progressEl.style.width = `${(loadedFrames / frameCount) * 100}%`;
-    }
-    if (loadedFrames === 1) {
-      resizeCanvas();
-    }
-    if (loadedFrames === frameCount) {
-      if (loaderEl) {
-        loaderEl.style.opacity = '0';
-        setTimeout(() => {
-          loaderEl.style.display = 'none';
-        }, 500);
+if (!isMobile) {
+  for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.src = cloudinaryUrls[i];
+    img.onload = () => {
+      loadedFrames++;
+      if (progressEl) {
+        progressEl.style.width = `${(loadedFrames / frameCount) * 100}%`;
       }
-      resizeCanvas();
-    }
-  };
-  frames.push(img);
+      if (loadedFrames === 1) {
+        resizeCanvas();
+      }
+      if (loadedFrames === frameCount) {
+        if (loaderEl) {
+          loaderEl.style.opacity = '0';
+          setTimeout(() => {
+            loaderEl.style.display = 'none';
+          }, 500);
+        }
+        resizeCanvas();
+      }
+    };
+    frames.push(img);
+  }
 }
 let currentFrameIndex = 0;
 function renderFrame(index) {
@@ -2050,7 +2067,6 @@ const cards = [
   { el: document.getElementById('card-2'), start: 0.35, end: 0.6 },
   { el: document.getElementById('card-3'), start: 0.65, end: 0.95 }
 ];
-const isMobile = window.matchMedia('(max-width: 768px)').matches;
 let lastScrollY = window.scrollY;
 window.addEventListener('scroll', () => {
   const rect = scrollContainer.getBoundingClientRect();
@@ -2066,24 +2082,19 @@ window.addEventListener('scroll', () => {
   let fraction = (window.scrollY - topOffset) / totalHeight;
   
   fraction = Math.max(0, Math.min(1, fraction));
-  const targetFrame = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
-  
-  if (targetFrame !== currentFrameIndex) {
-    currentFrameIndex = targetFrame;
-    requestAnimationFrame(() => renderFrame(currentFrameIndex));
-  }
-  
-  const cardTimings = isMobile ? [
-    { start: 0.01, end: 0.42 },
-    { start: 0.24, end: 0.68 },
-    { start: 0.5, end: 0.98 }
-  ] : cards;
+  if (!isMobile) {
+    const targetFrame = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
 
-  cards.forEach((card, index) => {
-    const timing = cardTimings[index];
-    if (fraction >= timing.start && fraction <= timing.end) card.el.classList.add('active');
-    else card.el.classList.remove('active');
-  });
+    if (targetFrame !== currentFrameIndex) {
+      currentFrameIndex = targetFrame;
+      requestAnimationFrame(() => renderFrame(currentFrameIndex));
+    }
+
+    cards.forEach((card) => {
+      if (fraction >= card.start && fraction <= card.end) card.el.classList.add('active');
+      else card.el.classList.remove('active');
+    });
+  }
   
   const nav = document.getElementById('navbar');
   const triggerStart = topOffset - (window.innerHeight / 10);
