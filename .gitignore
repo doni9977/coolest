@@ -1,0 +1,14 @@
+# 1. Игнорируем всё
+*
+
+# 2. Разрешаем сам gitignore
+!.gitignore
+
+# 3. Разрешаем файлы в корне
+!index.html
+!privacy.html
+!term.html
+
+# 4. Разрешаем папку images и её содержимое
+!images/
+!images/**
