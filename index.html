@@ -1120,13 +1120,15 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   .cards-container {
     display: none;
   }
-  .mobile-scroll-video {
+  .mobile-scroll-video,
+  .mobile-scroll-gif {
     display: block;
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     z-index: 0;
+    object-fit: cover;
   }
   .mobile-scroll-overlay {
     position: absolute;
@@ -1181,6 +1183,19 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   #card-3.active { transform: translateY(0) !important; }
   .annotation-card h3 { font-size: 1.14rem; margin-bottom: 0.35rem; letter-spacing: -0.4px; color: #101828; opacity: 1; }
   .annotation-card p { font-size: 0.96rem; line-height: 1.5; color: #334155; }
+  body.dark-mode {
+    --bg: #FFFFFF;
+    --bg-alt: rgb(250, 250, 250);
+    --accent: #1372C4;
+    --accent-light: #e8f2fb;
+    --accent-alert: #E63946;
+    --text-dark: #111111;
+    --text-muted: #555555;
+    --surface: rgba(255, 255, 255, 0.4);
+    --border: rgba(19, 114, 196, 0.15);
+    --nav-bg: rgba(255, 255, 255, 0.85);
+    --card-bg: rgba(255, 255, 255, 0.85);
+  }
   .problem, .solution, .how, .benefits, .forwho, .traction, .testimonial, .team, .cta { padding: 4rem 1rem; }
   .problem-inner { gap: 2.5rem; }
   .stat-card { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem; }
@@ -1409,7 +1424,7 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 <div class="scroll-container" id="animation-trigger">
   <div class="sticky-wrapper">
     <canvas id="video-canvas"></canvas>
-    <video class="mobile-scroll-video" autoplay muted loop playsinline webkit-playsinline preload="auto" src="hf_20260405_183155_b8da9f2b-6dc9-4aa5-bfc7-ba83246f05d0.mp4"></video>
+    <img class="mobile-scroll-gif" src="moblie.gif" alt="" aria-hidden="true">
     <div class="mobile-scroll-overlay" aria-hidden="true">
       <div class="mobile-scroll-copy">
         <span class="section-label">Colo.ai on mobile</span>
@@ -1697,28 +1712,6 @@ let loadedFrames = 0;
 const progressEl = document.getElementById('progress');
 const loaderEl = document.getElementById('loader');
 const isMobile = window.matchMedia('(max-width: 768px)').matches;
-const mobileScrollVideo = document.querySelector('.mobile-scroll-video');
-
-if (mobileScrollVideo) {
-  mobileScrollVideo.controls = false;
-  mobileScrollVideo.removeAttribute('controls');
-  mobileScrollVideo.setAttribute('webkit-playsinline', 'true');
-}
-
-function startMobileScrollVideo() {
-  if (!isMobile || !mobileScrollVideo) return;
-  mobileScrollVideo.muted = true;
-  mobileScrollVideo.loop = true;
-  mobileScrollVideo.autoplay = true;
-  mobileScrollVideo.playsInline = true;
-  mobileScrollVideo.play().catch(() => {});
-}
-
-if (isMobile && mobileScrollVideo) {
-  mobileScrollVideo.addEventListener('loadedmetadata', startMobileScrollVideo, { once: true });
-  mobileScrollVideo.addEventListener('canplay', startMobileScrollVideo, { once: true });
-  window.addEventListener('load', startMobileScrollVideo, { once: true });
-}
 
 function resizeCanvas() {
   canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -2117,8 +2110,6 @@ if (!isMobile) {
     };
     frames.push(img);
   }
-} else {
-  startMobileScrollVideo();
 }
 let currentFrameIndex = 0;
 function renderFrame(index) {
@@ -2166,15 +2157,19 @@ window.addEventListener('scroll', () => {
       if (fraction >= card.start && fraction <= card.end) card.el.classList.add('active');
       else card.el.classList.remove('active');
     });
+  } else {
+    document.body.classList.remove('dark-mode');
   }
-  
+
   const nav = document.getElementById('navbar');
   const triggerStart = topOffset - (window.innerHeight / 10);
   const triggerEnd = topOffset + scrollContainer.offsetHeight + (window.innerHeight / 100);
-  if (window.scrollY > triggerStart && window.scrollY < triggerEnd) {
-      document.body.classList.add('dark-mode');
-  } else {
-      document.body.classList.remove('dark-mode');
+  if (!isMobile) {
+    if (window.scrollY > triggerStart && window.scrollY < triggerEnd) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
   }
 
   lastScrollY = currentScrollY;
