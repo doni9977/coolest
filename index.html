@@ -1120,8 +1120,7 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   .cards-container {
     display: none;
   }
-  .mobile-scroll-video,
-  .mobile-scroll-gif {
+  .mobile-scroll-video {
     display: block;
     position: absolute;
     inset: 0;
@@ -1424,12 +1423,12 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 <div class="scroll-container" id="animation-trigger">
   <div class="sticky-wrapper">
     <canvas id="video-canvas"></canvas>
-    <img class="mobile-scroll-gif" src="moblie.gif" alt="" aria-hidden="true">
+    <video class="mobile-scroll-video" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noplaybackrate" src="hf_20260405_183155_b8da9f2b-6dc9-4aa5-bfc7-ba83246f05d0.mp4"></video>
     <div class="mobile-scroll-overlay" aria-hidden="true">
       <div class="mobile-scroll-copy">
-        <span class="section-label">Colo.ai on mobile</span>
-        <h3>Видео как фон, текст поверх него.</h3>
-        <p>На телефоне этот блок работает как короткая живая сцена: фон остается видео, а смысловой текст всегда читается сверху.</p>
+        <span class="section-label">РАННЯЯ ДИАГНОСТИКА</span>
+        <h3>Рак, который можно предотвратить.</h3>
+        <p>Колоректальный рак развивается годами. Наш ИИ замечает опасные изменения на самых ранних стадиях, когда шансы на полное излечение максимальны.</p>
       </div>
     </div>
     <div class="cards-container">
@@ -1712,6 +1711,25 @@ let loadedFrames = 0;
 const progressEl = document.getElementById('progress');
 const loaderEl = document.getElementById('loader');
 const isMobile = window.matchMedia('(max-width: 768px)').matches;
+const mobileScrollVideo = document.querySelector('.mobile-scroll-video');
+
+function startMobileScrollVideo() {
+  if (!isMobile || !mobileScrollVideo) return;
+  mobileScrollVideo.muted = true;
+  mobileScrollVideo.defaultMuted = true;
+  mobileScrollVideo.loop = true;
+  mobileScrollVideo.playsInline = true;
+  mobileScrollVideo.setAttribute('muted', '');
+  mobileScrollVideo.setAttribute('playsinline', '');
+  mobileScrollVideo.setAttribute('webkit-playsinline', 'true');
+  mobileScrollVideo.play().catch(() => {});
+}
+
+if (isMobile && mobileScrollVideo) {
+  mobileScrollVideo.addEventListener('loadeddata', startMobileScrollVideo, { once: true });
+  mobileScrollVideo.addEventListener('canplay', startMobileScrollVideo, { once: true });
+  window.addEventListener('load', startMobileScrollVideo, { once: true });
+}
 
 function resizeCanvas() {
   canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -2110,6 +2128,8 @@ if (!isMobile) {
     };
     frames.push(img);
   }
+} else {
+  startMobileScrollVideo();
 }
 let currentFrameIndex = 0;
 function renderFrame(index) {
