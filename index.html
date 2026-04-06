@@ -155,7 +155,7 @@ h1, h2, h3, h4, .brand { font-family: 'Unbounded', sans-serif; }
   background: rgba(19,114,196,0.09) !important;
 }
 .nav-cta {
-  background: var(--accent) !important;
+  background: #1372C4 !important;
   color: #fff !important;
   padding: 0.6rem 1.4rem;
   border-radius: 50px;
@@ -970,6 +970,7 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 .demo-modal-dialog {
   width: min(640px, 100%);
   background: #fff;
+  color: #0f172a;
   border-radius: 20px;
   border: 1px solid var(--border);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
@@ -987,11 +988,12 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 }
 .demo-modal-head h3 {
   font-size: 1.4rem;
+  color: #0f172a;
   letter-spacing: -0.5px;
   margin-bottom: 0.4rem;
 }
 .demo-modal-head p {
-  color: var(--text-muted);
+  color: #64748b;
   font-size: 0.92rem;
   line-height: 1.5;
 }
@@ -1059,7 +1061,7 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 }
 .btn-modal-primary {
   border: none;
-  background: var(--accent);
+  background: #1372C4;
   color: #fff;
   border-radius: 12px;
   padding: 0.8rem 1.2rem;
@@ -1070,6 +1072,82 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   grid-column: 1 / -1;
   color: #64748b;
   font-size: 0.8rem;
+}
+.site-feedback {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4.5rem 1rem 1rem;
+  background: rgba(6, 14, 26, 0.35);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10100;
+}
+.site-feedback.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.site-feedback-card {
+  width: min(420px, 100%);
+  background: linear-gradient(140deg, rgba(14, 20, 36, 0.96), rgba(24, 14, 34, 0.95));
+  color: #eef4ff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  padding: 1rem 1rem 0.9rem;
+  box-shadow: 0 24px 60px rgba(5, 8, 18, 0.45);
+}
+.site-feedback-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+.site-feedback-title {
+  font-size: 1.03rem;
+  color: #f8fbff;
+  line-height: 1.2;
+}
+.site-feedback-close {
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #e2ebff;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.site-feedback-message {
+  font-size: 0.93rem;
+  color: rgba(238, 244, 255, 0.92);
+  line-height: 1.5;
+  margin-bottom: 0.7rem;
+}
+.site-feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.site-feedback-ok {
+  border: 2px solid rgba(186, 141, 255, 0.8);
+  background: rgba(186, 141, 255, 0.18);
+  color: #efe7ff;
+  border-radius: 999px;
+  padding: 0.45rem 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.site-feedback.success .site-feedback-title {
+  color: #f4fffc;
+}
+.site-feedback.error .site-feedback-title {
+  color: #ffd8d8;
 }
 @media (max-width: 1024px) {
   .main-hero { grid-template-columns: 1fr; text-align: center; padding: 6rem 1.6rem 3.5rem; gap: 2.6rem; }
@@ -1282,6 +1360,31 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
     width: 100%;
     padding: 0.9rem 1rem;
   }
+  .site-feedback {
+    align-items: flex-start;
+    padding: calc(0.6rem + env(safe-area-inset-top)) 0.55rem 0.7rem;
+  }
+  .site-feedback-card {
+    width: 100%;
+    border-radius: 14px;
+    padding: 0.85rem 0.85rem 0.8rem;
+  }
+  .site-feedback-title { font-size: 0.95rem; }
+  .site-feedback-message {
+    font-size: 0.86rem;
+    margin-bottom: 0.55rem;
+  }
+  .site-feedback-close {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+  }
+  .site-feedback-actions { justify-content: stretch; }
+  .site-feedback-ok {
+    width: 100%;
+    border-radius: 12px;
+    padding: 0.62rem 1rem;
+  }
 }
 @media (max-width: 480px) {
   .hero-left h1 { font-size: 1.9rem; letter-spacing: -1px; }
@@ -1307,6 +1410,10 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   }
   .annotation-card h3 { font-size: 1rem; color: #101828; opacity: 1; }
   .annotation-card p { font-size: 0.88rem; line-height: 1.48; color: #334155; }
+  .site-feedback {
+    padding: calc(0.45rem + env(safe-area-inset-top)) 0.45rem 0.6rem;
+  }
+  .site-feedback-card { border-radius: 12px; }
 }
 </style>
 </head>
@@ -1687,6 +1794,19 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
         <button type="submit" class="btn-modal-primary">Отправить запрос</button>
       </div>
     </form>
+  </div>
+</div>
+
+<div class="site-feedback" id="siteFeedback" aria-hidden="true">
+  <div class="site-feedback-card" role="status" aria-live="polite" aria-atomic="true">
+    <div class="site-feedback-head">
+      <strong class="site-feedback-title" id="siteFeedbackTitle">Статус</strong>
+      <button class="site-feedback-close" id="siteFeedbackClose" type="button" aria-label="Закрыть">×</button>
+    </div>
+    <p class="site-feedback-message" id="siteFeedbackMessage">Сообщение</p>
+    <div class="site-feedback-actions">
+      <button class="site-feedback-ok" id="siteFeedbackOk" type="button">ОК</button>
+    </div>
   </div>
 </div>
 
@@ -2243,6 +2363,11 @@ const demoForm = document.getElementById('demoRequestForm');
 const openDemoButtons = document.querySelectorAll('.open-demo-modal');
 const closeDemoModal = document.getElementById('closeDemoModal');
 const cancelDemoModal = document.getElementById('cancelDemoModal');
+const siteFeedback = document.getElementById('siteFeedback');
+const siteFeedbackTitle = document.getElementById('siteFeedbackTitle');
+const siteFeedbackMessage = document.getElementById('siteFeedbackMessage');
+const siteFeedbackClose = document.getElementById('siteFeedbackClose');
+const siteFeedbackOk = document.getElementById('siteFeedbackOk');
 
 function openModal() {
   demoModal.classList.add('open');
@@ -2254,6 +2379,22 @@ function closeModal() {
   demoModal.classList.remove('open');
   demoModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+}
+
+function showSiteFeedback(type, title, message) {
+  if (!siteFeedback || !siteFeedbackTitle || !siteFeedbackMessage) return;
+  siteFeedback.classList.remove('success', 'error');
+  siteFeedback.classList.add(type);
+  siteFeedbackTitle.textContent = title;
+  siteFeedbackMessage.textContent = message;
+  siteFeedback.classList.add('open');
+  siteFeedback.setAttribute('aria-hidden', 'false');
+}
+
+function hideSiteFeedback() {
+  if (!siteFeedback) return;
+  siteFeedback.classList.remove('open');
+  siteFeedback.setAttribute('aria-hidden', 'true');
 }
 
 openDemoButtons.forEach((btn) => {
@@ -2270,20 +2411,56 @@ demoModal.addEventListener('click', (event) => {
   if (event.target === demoModal) closeModal();
 });
 
+siteFeedbackClose.addEventListener('click', hideSiteFeedback);
+siteFeedbackOk.addEventListener('click', hideSiteFeedback);
+
+siteFeedback.addEventListener('click', (event) => {
+  if (event.target === siteFeedback) hideSiteFeedback();
+});
+
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && demoModal.classList.contains('open')) {
     closeModal();
   }
+  if (event.key === 'Escape' && siteFeedback.classList.contains('open')) {
+    hideSiteFeedback();
+  }
 });
 
-demoForm.addEventListener('submit', (event) => {
+demoForm.addEventListener('submit', async (event) => {
   event.preventDefault();
+
+  const submitButton = demoForm.querySelector('button[type="submit"]');
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Отправка...';
+  }
+
   const formData = new FormData(demoForm);
-  const payload = Object.fromEntries(formData.entries());
-  console.log('Demo request:', payload);
-  alert('Спасибо! Заявка принята. Мы свяжемся с вами в ближайшее время.');
-  demoForm.reset();
-  closeModal();
+  formData.append('access_key', 'c6183696-03e5-42df-b670-0fd1e1e9972a');
+  formData.append('subject', 'coloai');
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      showSiteFeedback('success', 'Подтвердите действие', 'Спасибо! Заявка принята. Мы свяжемся с вами в ближайшее время.');
+      demoForm.reset();
+      closeModal();
+    } else {
+      showSiteFeedback('error', 'Ошибка отправки', 'Не удалось отправить форму. Попробуйте позже.');
+    }
+  } catch (error) {
+    showSiteFeedback('error', 'Ошибка сети', 'Проверьте подключение к интернету и попробуйте снова.');
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Отправить запрос';
+    }
+  }
 });
 </script>
 </body>
