@@ -2457,15 +2457,15 @@ demoForm.addEventListener('submit', async (event) => {
   formData.append('subject', `Новая заявка на демо - ${orgName || 'Без названия учреждения'}`);
   formData.append('from_name', 'Colo.ai Website (RU)');
   formData.append('replyto', workEmail || 'no-reply@colo.ai');
-  formData.append('Источник заявки', 'Сайт RU');
-  formData.append('Тип учреждения', typeMap[orgType] || orgType || '-');
-  formData.append('Название учреждения', orgName || '-');
-  formData.append('Контактное лицо', fullName || '-');
-  formData.append('Должность', position || '-');
-  formData.append('Рабочий email', workEmail || '-');
-  formData.append('Телефон', phone || '-');
-  formData.append('Комментарий', message || '-');
-  formData.append('Время отправки', new Date().toLocaleString('ru-RU', { hour12: false }));
+  formData.append('Request Source', 'Website RU');
+  formData.append('Organization Type', typeMap[orgType] || orgType || '-');
+  formData.append('Organization Name', orgName || '-');
+  formData.append('Contact Person', fullName || '-');
+  formData.append('Position', position || '-');
+  formData.append('Work Email', workEmail || '-');
+  formData.append('Phone', phone || '-');
+  formData.append('Comment', message || '-');
+  formData.append('Submitted At', new Date().toLocaleString('ru-RU', { hour12: false }));
 
   try {
     const response = await fetch('https://api.web3forms.com/submit', {
