@@ -1089,7 +1089,7 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 @media (max-width: 768px) {
   .navbar { padding: 0.8rem 1rem; }
   .nav-links { display: flex; gap: 0.6rem; margin-left: auto; }
-  .nav-links a:not(.nav-cta) { display: none; }
+  .nav-links a:not(.nav-cta):not(.nav-lang) { display: none; }
   .nav-cta { padding: 0.5rem 0.95rem; font-size: 0.72rem !important; }
   .main-hero { padding: 5.2rem 1rem 2rem; gap: 1.4rem; min-height: auto; }
   .hero-left h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
@@ -1109,6 +1109,10 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   .m-badge { width: 92px; font-size: 0.56rem; padding: 3px 6px; }
   .m-pct { font-size: 0.74rem; min-width: 28px; }
   .scroll-container { height: 120vh; }
+  .sticky-wrapper {
+    overflow: hidden;
+    border-radius: 0;
+  }
   .sticky-wrapper::after {
     display: none;
   }
@@ -1118,8 +1122,45 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   }
   .mobile-scroll-video {
     display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
   }
-  .cards-container { z-index: 2; }
+  .mobile-scroll-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    padding: calc(1rem + env(safe-area-inset-top)) 1rem 1.2rem;
+    background: linear-gradient(180deg, rgba(10, 15, 23, 0.05) 0%, rgba(10, 15, 23, 0.22) 52%, rgba(10, 15, 23, 0.68) 100%);
+    pointer-events: none;
+  }
+  .mobile-scroll-copy {
+    max-width: 26rem;
+    color: #fff;
+    text-align: left;
+  }
+  .mobile-scroll-copy .section-label {
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: 0.7rem;
+    font-size: 0.68rem;
+    letter-spacing: 2.4px;
+  }
+  .mobile-scroll-copy h3 {
+    font-size: clamp(1.45rem, 6.2vw, 2rem);
+    line-height: 1.05;
+    margin-bottom: 0.55rem;
+    letter-spacing: -0.8px;
+  }
+  .mobile-scroll-copy p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 18rem;
+  }
   .annotation-card,
   #card-1,
   #card-2,
@@ -1368,7 +1409,14 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 <div class="scroll-container" id="animation-trigger">
   <div class="sticky-wrapper">
     <canvas id="video-canvas"></canvas>
-    <video class="mobile-scroll-video" autoplay muted loop playsinline preload="metadata" src="hf_20260405_183155_b8da9f2b-6dc9-4aa5-bfc7-ba83246f05d0.mp4"></video>
+    <video class="mobile-scroll-video" autoplay muted loop playsinline webkit-playsinline preload="auto" src="hf_20260405_183155_b8da9f2b-6dc9-4aa5-bfc7-ba83246f05d0.mp4"></video>
+    <div class="mobile-scroll-overlay" aria-hidden="true">
+      <div class="mobile-scroll-copy">
+        <span class="section-label">Colo.ai on mobile</span>
+        <h3>Видео как фон, текст поверх него.</h3>
+        <p>На телефоне этот блок работает как короткая живая сцена: фон остается видео, а смысловой текст всегда читается сверху.</p>
+      </div>
+    </div>
     <div class="cards-container">
       <div class="annotation-card" id="card-1">
         <h3>Ранний сигнал</h3>
@@ -1649,6 +1697,28 @@ let loadedFrames = 0;
 const progressEl = document.getElementById('progress');
 const loaderEl = document.getElementById('loader');
 const isMobile = window.matchMedia('(max-width: 768px)').matches;
+const mobileScrollVideo = document.querySelector('.mobile-scroll-video');
+
+if (mobileScrollVideo) {
+  mobileScrollVideo.controls = false;
+  mobileScrollVideo.removeAttribute('controls');
+  mobileScrollVideo.setAttribute('webkit-playsinline', 'true');
+}
+
+function startMobileScrollVideo() {
+  if (!isMobile || !mobileScrollVideo) return;
+  mobileScrollVideo.muted = true;
+  mobileScrollVideo.loop = true;
+  mobileScrollVideo.autoplay = true;
+  mobileScrollVideo.playsInline = true;
+  mobileScrollVideo.play().catch(() => {});
+}
+
+if (isMobile && mobileScrollVideo) {
+  mobileScrollVideo.addEventListener('loadedmetadata', startMobileScrollVideo, { once: true });
+  mobileScrollVideo.addEventListener('canplay', startMobileScrollVideo, { once: true });
+  window.addEventListener('load', startMobileScrollVideo, { once: true });
+}
 
 function resizeCanvas() {
   canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -2047,6 +2117,8 @@ if (!isMobile) {
     };
     frames.push(img);
   }
+} else {
+  startMobileScrollVideo();
 }
 let currentFrameIndex = 0;
 function renderFrame(index) {
