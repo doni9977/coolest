@@ -8,6 +8,9 @@
 !index.html
 !privacy.html
 !term.html
+!index-en.html
+!privacy-en.html
+!term-en.html
 
 # 4. Разрешаем папку images и её содержимое
 !images/

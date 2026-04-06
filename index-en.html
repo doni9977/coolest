@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colo.ai | Раннее обнаружение колоректального рака</title>
+<title>Colo.ai | Early Colorectal Cancer Detection</title>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -188,6 +188,8 @@ h1, h2, h3, h4, .brand { font-family: 'Unbounded', sans-serif; }
 }
 .hero-left {
   max-width: 600px;
+  position: relative;
+  z-index: 1;
   opacity: 0;
   transform: translateY(40px);
   animation: heroIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -1081,7 +1083,11 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   .scroll-container { height: 300vh; }
 }
 @media (max-width: 768px) {
-  .navbar { padding: 0.8rem 1rem; }
+  .navbar {
+    top: 10px;
+    width: calc(100% - 1rem);
+    padding: 0.7rem 0.95rem;
+  }
   .nav-links { display: flex; gap: 0.6rem; margin-left: auto; }
   .nav-links a:not(.nav-cta) { display: none; }
   .nav-cta { padding: 0.5rem 0.95rem; font-size: 0.72rem !important; }
@@ -1119,14 +1125,14 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
     transform: translateY(30px) !important;
     padding: 1rem 1rem 1.05rem;
     border-radius: 18px;
-    background: rgba(255, 255, 255, 0.98);
+    background: rgba(255, 255, 255, 0.97);
     border: 1px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
   }
   .annotation-card.active,
   #card-3.active { transform: translateY(0) !important; }
-  .annotation-card h3 { font-size: 1.14rem; margin-bottom: 0.35rem; letter-spacing: -0.4px; color: #101828; opacity: 1; }
-  .annotation-card p { font-size: 0.96rem; line-height: 1.5; color: #334155; }
+  .annotation-card h3 { font-size: 1.22rem; margin-bottom: 0.45rem; letter-spacing: -0.4px; }
+  .annotation-card p { font-size: 1rem; line-height: 1.55; color: #2f3a4a; }
   .problem, .solution, .how, .benefits, .forwho, .traction, .testimonial, .team, .cta { padding: 4rem 1rem; }
   .problem-inner { gap: 2.5rem; }
   .stat-card { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem; }
@@ -1184,36 +1190,9 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   .btn-white, .btn-ghost { width: 100%; }
   .footer-inner { flex-direction: column; text-align: center; }
   .footer-links { flex-wrap: wrap; justify-content: center; }
-  .demo-modal { padding: 0.45rem; align-items: flex-end; }
-  .demo-modal-dialog {
-    padding: 1rem;
-    border-radius: 18px 18px 0 0;
-    max-height: 92vh;
-    overflow-y: auto;
-    width: 100%;
-  }
-  .demo-modal-head { margin-bottom: 1rem; }
-  .demo-modal-head h3 { font-size: 1.2rem; }
-  .demo-modal-head p { font-size: 0.88rem; }
-  .demo-form { grid-template-columns: 1fr; gap: 0.8rem; }
-  .demo-field label { font-size: 0.76rem; }
-  .demo-field input,
-  .demo-field select,
-  .demo-field textarea {
-    padding: 0.78rem 0.85rem;
-    border-radius: 10px;
-    font-size: 0.92rem;
-  }
-  .demo-field textarea { min-height: 92px; }
-  .demo-form-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .btn-modal-secondary,
-  .btn-modal-primary {
-    width: 100%;
-    padding: 0.9rem 1rem;
-  }
+  .demo-modal { padding: 0.8rem; }
+  .demo-modal-dialog { padding: 1.2rem; border-radius: 16px; }
+  .demo-form { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .hero-left h1 { font-size: 1.9rem; letter-spacing: -1px; }
@@ -1237,8 +1216,8 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
     bottom: auto;
     padding: 0.9rem;
   }
-  .annotation-card h3 { font-size: 1rem; color: #101828; opacity: 1; }
-  .annotation-card p { font-size: 0.88rem; line-height: 1.48; color: #334155; }
+  .annotation-card h3 { font-size: 1.08rem; }
+  .annotation-card p { font-size: 0.92rem; line-height: 1.5; }
 }
 </style>
 </head>
@@ -1253,33 +1232,33 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 <nav class="navbar" id="navbar">
   <div class="brand">colo.ai</div>
   <div class="nav-links">
-    <a href="#problem">ПРОБЛЕМА</a>
-    <a href="#solution">РЕШЕНИЕ</a>
-    <a href="index-en.html" class="nav-lang">EN</a>
-    <a href="#contact" class="nav-cta open-demo-modal">Запросить демо</a>
+    <a href="#problem">PROBLEM</a>
+    <a href="#solution">SOLUTION</a>
+    <a href="index.html" class="nav-lang">RU</a>
+    <a href="#contact" class="nav-cta open-demo-modal">Request Demo</a>
   </div>
 </nav>
 
 <section class="main-hero">
   <div class="hero-left">
-    <h1>Профилактика<br><span style="color: var(--accent);">начинается</span><br>с точного взгляда</h1>
-    <p>Colo.ai помогает врачу увидеть ранние признаки риска во время стандартной эндоскопии. Быстро, точно и без лишней нагрузки на команду</p>
+    <h1>Prevention<br><span style="color: var(--accent);">starts</span><br>with a sharper view</h1>
+    <p>Colo.ai helps physicians spot early warning signs during routine endoscopy. Fast, accurate, and without adding extra strain to the clinical team.</p>
     <div class="hero-btns-new">
-      <a href="#contact" class="btn-dark open-demo-modal">Запросить демо</a>
-      <a href="#solution" class="btn-light">Узнать больше</a>
+      <a href="#contact" class="btn-dark open-demo-modal">Request Demo</a>
+      <a href="#solution" class="btn-light">Learn More</a>
     </div>
     <div class="hero-stats">
       <div class="h-stat reveal">
         <h4 class="accent-num">80.0%</h4>
-        <span>Точность</span>
+        <span>Accuracy</span>
       </div>
       <div class="h-stat reveal">
         <h4 class="accent-num">2x</h4>
-        <span>Быстрее</span>
+        <span>Faster</span>
       </div>
       <div class="h-stat reveal">
         <h4 class="accent-num">50+</h4>
-        <span>Биомаркеров</span>
+        <span>Biomarkers</span>
       </div>
     </div>
   </div>
@@ -1291,7 +1270,7 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
       </div>
       <div class="fc-text">
         <h5 class="accent-num">80.0%</h5>
-        <span>Точность</span>
+        <span>Accuracy</span>
       </div>
     </div>
     <div class="float-card bot-right">
@@ -1299,8 +1278,8 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
       <div class="fc-text">
-        <h5 class="accent-num">&lt;2c</h5>
-        <span>Анализ кадра</span>
+        <h5 class="accent-num">&lt;2s</h5>
+        <span>Frame analysis</span>
       </div>
     </div>
 
@@ -1311,16 +1290,16 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
           <div class="m-dot m-yel"></div>
           <div class="m-dot m-grn"></div>
         </div>
-        <div class="mock-title">Colo.ai - Анализ снимков эндоскопии</div>
+        <div class="mock-title">Colo.ai - Endoscopy Image Analysis</div>
         <div class="mock-live">LIVE</div>
       </div>
       <div class="mock-body">
-        <div class="mock-patient">СЕССИЯ #4821 • ПАЦИЕНТ АНОНИМИЗИРОВАН</div>
+        <div class="mock-patient">SESSION #4821 • PATIENT ANONYMIZED</div>
         
         <div class="mock-video">
-          <span class="mock-video-text">ЭНДОСКОП • HD</span>
+          <span class="mock-video-text">ENDOSCOPE • HD</span>
           <div class="mock-box">
-            <div class="mock-box-label">Полип • 94%</div>
+            <div class="mock-box-label">Polyp • 94%</div>
           </div>
           <div class="mock-box-2">
             <div class="mock-box-label-2">68%</div>
@@ -1328,23 +1307,23 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
         </div>
 
         <div class="mock-row">
-          <div class="m-badge b-red">Высокий риск</div>
+          <div class="m-badge b-red">High risk</div>
           <div class="m-line"><div class="m-fill f-red"></div></div>
           <div class="m-pct">22%</div>
         </div>
         <div class="mock-row">
-          <div class="m-badge b-yel">Умеренный</div>
+          <div class="m-badge b-yel">Moderate</div>
           <div class="m-line"><div class="m-fill f-yel"></div></div>
           <div class="m-pct">45%</div>
         </div>
         <div class="mock-row">
-          <div class="m-badge b-grn">Низкий риск</div>
+          <div class="m-badge b-grn">Low risk</div>
           <div class="m-line"><div class="m-fill f-grn"></div></div>
           <div class="m-pct"></div>
         </div>
 
         <div class="mock-rec">
-          <strong>Рекомендация ИИ:</strong> Обнаружен 1 полип высокого приоритета на 35 см. Рекомендуется немедленная биопсия. Отчёт отправлен в ЭМК.
+          <strong>AI recommendation:</strong> 1 high-priority polyp detected at 35 cm. Immediate biopsy recommended. Report sent to EMR.
         </div>
       </div>
     </div>
@@ -1357,16 +1336,16 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
     <canvas id="video-canvas"></canvas>
     <div class="cards-container">
       <div class="annotation-card" id="card-1">
-        <h3>Ранний сигнал</h3>
-        <p>Когда подозрительная зона замечена сразу, у пациента появляется больше шансов на щадящее и своевременное вмешательство.</p>
+        <h3>Early Signal</h3>
+        <p>When a suspicious area is noticed immediately, the patient has a better chance of timely and less invasive intervention.</p>
       </div>
       <div class="annotation-card" id="card-2">
-        <h3>Точка решения</h3>
-        <p>Colo.ai анализирует снимки и помогает врачу принимать уверенные  решения.</p>
+        <h3>Decision Point</h3>
+        <p>Colo.ai analyzes images and helps physicians make confident decisions.</p>
       </div>
       <div class="annotation-card" id="card-3">
-        <h3>Оценка рисков</h3>
-        <p>Классифицирует находки за считанные секунды - низкий, средний или высокий, давая чёткий сигнал к действию.</p>
+        <h3>Risk Assessment</h3>
+        <p>Classifies findings within seconds as low, medium, or high risk, providing a clear signal for action.</p>
       </div>
     </div>
   </div>
@@ -1375,22 +1354,22 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 <section class="problem" id="problem">
   <div class="problem-inner">
     <div class="problem-text reveal">
-      <span class="section-label">Проблема</span>
-      <h2 class="section-title">Колоректальный рак - второй по смертности в мире, однако его во многом можно предотвратить</h2>
-      <p class="section-sub">Трагедия не в самой болезни. А в том, как часто она остаётся незамеченной до тех пор, пока не станет слишком поздно. Текущие инструменты скрининга упускают слишком много.</p>
+      <span class="section-label">Problem</span>
+      <h2 class="section-title">Colorectal cancer is the second deadliest cancer in the world, yet much of it can be prevented</h2>
+      <p class="section-sub">The tragedy is not only the disease itself. It is how often it remains unnoticed until it is too late. Current screening tools still miss far too much.</p>
     </div>
     <div class="problem-stats">
       <div class="stat-card reveal">
         <div class="stat-num danger">2M</div>
-        <p>новых случаев колоректального рака диагностируется ежегодно во всём мире</p>
+        <p>new colorectal cancer cases are diagnosed globally every year</p>
       </div>
       <div class="stat-card reveal">
         <div class="stat-num dark">60%</div>
-        <p>случаев выявляются на поздних стадиях, когда выживаемость значительно снижается</p>
+        <p>of cases are detected at later stages, when survival drops significantly</p>
       </div>
       <div class="stat-card reveal">
-        <div class="stat-num blue">1 из 4</div>
-        <p>полипов пропускается при стандартной колоноскопии</p>
+        <div class="stat-num blue">1 in 4</div>
+        <p>polyps are missed during standard colonoscopy</p>
       </div>
     </div>
   </div>
@@ -1399,40 +1378,40 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 <section class="solution" id="solution">
   <div class="solution-inner">
     <div class="solution-header reveal">
-      <span class="section-label">Наше решение</span>
-      <h2 class="section-title">Colo.ai анализирует эндоскопические снимки за считанные секунды</h2>
-      <p class="section-sub">Наш ИИ обнаруживает ранние признаки рака за несколько секунд после загрузки данных исследования. Быстрая и точная валидация результатов без потери времени.</p>
+      <span class="section-label">Our Solution</span>
+      <h2 class="section-title">Colo.ai analyzes endoscopic images in seconds</h2>
+      <p class="section-sub">Our AI detects early signs of cancer within seconds after study data is uploaded. Fast and accurate validation without wasting clinical time.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card reveal">
         <div class="feature-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <h3>Обнаружение полипов</h3>
-        <p>Выявляет полипы размером от 1 мм с нейросетевой точностью, замечая то, что пропускает человеческий глаз.</p>
+        <h3>Polyp Detection</h3>
+        <p>Detects polyps as small as 1 mm with neural-network precision, catching what the human eye can miss.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <h3>Оценка рисков</h3>
-        <p>Классифицирует находки за считанные секунды - низкий, средний или высокий - давая врачу чёткий сигнал к действию.</p>
+        <h3>Risk Assessment</h3>
+        <p>Classifies findings within seconds as low, medium, or high risk, giving physicians a clear signal for action.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-        <h3>Клинические рекомендации</h3>
-        <p>Генерирует рекомендации следующего шага на основе доказательной медицины - биопсия, удаление или интервал наблюдения.</p>
+        <h3>Clinical Recommendations</h3>
+        <p>Generates next-step recommendations based on evidence-based medicine: biopsy, removal, or follow-up interval.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
-        <h3>Анализ снимков за считанные секунды</h3>
-        <p>Система обрабатывает загруженные эндоскопические изображения за секунды, подсвечивая полипы и подозрительные зоны для быстрой валидации врачом.</p>
+        <h3>Image Analysis in Seconds</h3>
+        <p>The system processes uploaded endoscopic images in seconds, highlighting polyps and suspicious areas for rapid physician validation.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h7"/></svg></div>
-        <h3>Автоматические отчёты</h3>
-        <p>Структурированные отчёты генерируются за считанные секунды и интегрируются напрямую в электронную медкарту пациента.</p>
+        <h3>Automatic Reports</h3>
+        <p>Structured reports are generated in seconds and integrated directly into the patient's electronic medical record.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>Простая интеграция</h3>
-        <p>Работает с существующим оборудованием для эндоскопии и системами HIS/PACS. Никаких новых устройств, никаких сбоев в работе клиники.</p>
+        <h3>Easy Integration</h3>
+        <p>Works with existing endoscopy equipment and HIS/PACS systems. No new devices and no disruption to clinic workflows.</p>
       </div>
     </div>
   </div>
@@ -1441,39 +1420,39 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 <section class="benefits">
   <div class="benefits-inner">
     <div class="benefits-header reveal">
-      <span class="section-label">Почему colo.ai</span>
-      <h2 class="section-title">Создано для реальных клинических условий</h2>
+      <span class="section-label">Why colo.ai</span>
+      <h2 class="section-title">Built for real clinical environments</h2>
     </div>
     <div class="benefits-grid">
       <div class="benefit-card reveal">
         <svg class="benefit-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        <h3>Снижает число пропущенных случаев</h3>
-        <p>Выявляет полипы, которые иначе остались бы незамеченными, значительно снижая частоту интервальных раков.</p>
+        <h3>Reduces missed cases</h3>
+        <p>Detects polyps that might otherwise go unnoticed, significantly reducing interval cancer rates.</p>
       </div>
       <div class="benefit-card reveal">
         <svg class="benefit-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <h3>Экономит время врачей</h3>
-        <p>Устраняет необходимость ручного просмотра кадр за кадром. Врачи сосредоточены на лечении, а не документировании.</p>
+        <h3>Saves physicians time</h3>
+        <p>Removes the need for frame-by-frame manual review. Physicians stay focused on treatment, not documentation.</p>
       </div>
       <div class="benefit-card reveal">
         <svg class="benefit-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        <h3>Повышает точность</h3>
-        <p>ИИ-ассистированное обнаружение стабильно превосходит неассистированный анализ, независимо от опыта врача.</p>
+        <h3>Improves accuracy</h3>
+        <p>AI-assisted detection consistently outperforms unassisted review, regardless of physician experience.</p>
       </div>
       <div class="benefit-card reveal">
         <svg class="benefit-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
-        <h3>Готов к работе сразу</h3>
-        <p>Совместим с основными эндоскопическими платформами. Полное развёртывание менее чем за один день, без замены оборудования.</p>
+        <h3>Ready to Deploy</h3>
+        <p>Compatible with major endoscopy platforms. Full deployment takes less than one day, with no equipment replacement required.</p>
       </div>
       <div class="benefit-card reveal">
         <svg class="benefit-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <h3>Соответствует GDPR и HIPAA</h3>
-        <p>Все данные обрабатываются локально или в частном облаке. Данные пациентов никогда не покидают учреждение.</p>
+        <h3>Aligned with GDPR and HIPAA</h3>
+        <p>All data is processed locally or in a private cloud. Patient data never leaves the institution.</p>
       </div>
       <div class="benefit-card reveal">
         <svg class="benefit-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        <h3>Лучшие результаты для пациентов</h3>
-        <p>Раннее обнаружение означает больше вариантов лечения, меньше затрат и значительно более высокую выживаемость.</p>
+        <h3>Better Patient Outcomes</h3>
+        <p>Earlier detection means more treatment options, lower costs, and significantly better survival.</p>
       </div>
     </div>
   </div>
@@ -1482,24 +1461,24 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 <section class="forwho">
   <div class="forwho-inner">
     <div class="forwho-header reveal">
-      <span class="section-label">Целевая аудитория</span>
-      <h2 class="section-title">Создано для тех, кто на передовой</h2>
+      <span class="section-label">Target Audience</span>
+      <h2 class="section-title">Designed for those on the front line</h2>
     </div>
     <div class="forwho-grid">
       <div class="forwho-card reveal">
         <span class="forwho-emoji">🏥</span>
-        <h3>Больницы</h3>
-        <p>Снизьте уровень ошибок диагностики, улучшите показатели качества и стандартизируйте уровень помощи во всех эндоскопических кабинетах.</p>
+        <h3>Hospitals</h3>
+        <p>Reduce diagnostic error rates, improve quality metrics, and standardize care across all endoscopy rooms.</p>
       </div>
       <div class="forwho-card reveal">
         <span class="forwho-emoji">🔬</span>
-        <h3>Гастроэнтерологи</h3>
-        <p>Интеллектуальная вторая пара глаз, работающая в вашем ритме - помогает обнаруживать больше, документировать меньше, фокусироваться на пациентах.</p>
+        <h3>Gastroenterologists</h3>
+        <p>An intelligent second pair of eyes working at your pace, helping detect more, document less, and stay focused on patients.</p>
       </div>
       <div class="forwho-card reveal">
         <span class="forwho-emoji">🏨</span>
-        <h3>Частные клиники</h3>
-        <p>Выделитесь с ИИ-усиленным скринингом. Привлекайте пациентов, требующих самые передовые технологии.</p>
+        <h3>Private Clinics</h3>
+        <p>Stand out with AI-enhanced screening. Attract patients who expect the most advanced technology.</p>
       </div>
     </div>
   </div>
@@ -1507,12 +1486,12 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 
 <section class="testimonial">
   <div class="testimonial-inner">
-    <p class="testimonial-quote reveal">«Даже опытный специалист подвержен усталости. Colo.ai работает как надежный ассистент, который не пропустит ни одной детали, повышая качество диагностики.»</p>
+    <p class="testimonial-quote reveal">"Even experienced specialists get tired. Colo.ai works like a reliable assistant that does not miss a single detail and improves diagnostic quality."</p>
     <div class="testimonial-author reveal">
       <div class="author-avatar">AD</div>
       <div class="author-info">
-        <strong>Артур Д.Е.</strong>
-        <span>Основатель, CEO - Colo.ai</span>
+        <strong>Arthur D.E.</strong>
+        <span>Founder, CEO - Colo.ai</span>
       </div>
     </div>
   </div>
@@ -1520,44 +1499,44 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
 
 <section class="team" id="team">
   <div class="team-header reveal">
-    <span class="section-label">Команда</span>
-    <h2 class="section-title">Люди за Colo.ai</h2>
+    <span class="section-label">Team</span>
+    <h2 class="section-title">The People Behind Colo.ai</h2>
   </div>
   <div class="team-grid">
     <div class="team-card reveal">
       <div class="avatar"><img src="images/Arthur.jpg" alt="Arthur"></div>
       <h3>Arthur</h3>
       <span class="role">Founder, CEO</span>
-      <p class="bio">Руководит продуктом и общим направлением Colo.ai. Отвечает за стратегию, развитие команды и ключевые решения по продукту.</p>
+      <p class="bio">Leads product and overall direction at Colo.ai. Responsible for strategy, team growth, and key product decisions.</p>
     </div>
     <div class="team-card reveal">
       <div class="avatar"><img src="images/Dinara.JPG" alt="Dinara"></div>
       <h3>Dinara</h3>
       <span class="role">ML Engineer</span>
-      <p class="bio">Разрабатывает и улучшает модели, следит за качеством AI-анализа и адаптирует систему под реальные клинические сценарии.</p>
+      <p class="bio">Builds and improves the models, oversees AI analysis quality, and adapts the system to real clinical scenarios.</p>
     </div>
     <div class="team-card reveal">
       <div class="avatar"><img src="images/Aiqyn.jpg" alt="Aiqyn"></div>
       <h3>Aikyn</h3>
       <span class="role">Backend</span>
-      <p class="bio">Отвечает за серверную часть, интеграции и стабильную работу платформы. Обеспечивает быструю обработку данных и надежность системы.</p>
+      <p class="bio">Owns the backend, integrations, and stable platform performance. Ensures fast data processing and system reliability.</p>
     </div>
     <div class="team-card reveal">
       <div class="avatar"><img src="images/Danial.jpg" alt="Danial"></div>
       <h3>Danial</h3>
       <span class="role">Frontend Developer</span>
-      <p class="bio">Создает интерфейс и отвечает за пользовательский опыт. Делает платформу удобной, быстрой и понятной для врачей.</p>
+      <p class="bio">Designs the interface and user experience. Makes the platform intuitive, fast, and clear for physicians.</p>
     </div>
   </div>
 </section>
 
 <section class="cta" id="contact">
   <div class="cta-inner">
-    <h2 class="reveal">Готовы обнаруживать рак раньше?</h2>
-    <p class="reveal">Вы - клиника, больница или инвестор - мы с удовольствием покажем, что умеет Colo.ai. Давайте поговорим.</p>
+    <h2 class="reveal">Ready to detect cancer earlier?</h2>
+    <p class="reveal">If you represent a clinic, hospital, or investor, we would be glad to show what Colo.ai can do. Let's talk.</p>
     <div class="cta-btns reveal">
-      <a href="#contact" class="btn-white open-demo-modal">Запросить демо</a>
-      <a href="https://wa.me/77055532376" class="btn-ghost" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
+      <a href="#contact" class="btn-white open-demo-modal">Request Demo</a>
+      <a href="https://wa.me/77055532376" class="btn-ghost" target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
     </div>
   </div>
 </section>
@@ -1566,49 +1545,49 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   <div class="demo-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
     <div class="demo-modal-head">
       <div>
-        <h3 id="demoModalTitle">Запрос на демо</h3>
-        <p>Заполните форму, если вы представляете клинику или больницу. Мы свяжемся с вами в ближайшее время.</p>
+        <h3 id="demoModalTitle">Demo Request</h3>
+        <p>Fill out the form if you represent a clinic or hospital. We will contact you shortly.</p>
       </div>
-      <button class="demo-modal-close" id="closeDemoModal" type="button" aria-label="Закрыть">×</button>
+      <button class="demo-modal-close" id="closeDemoModal" type="button" aria-label="Close">×</button>
     </div>
     <form class="demo-form" id="demoRequestForm">
       <div class="demo-field">
-        <label for="orgType">Тип учреждения</label>
+        <label for="orgType">Organization Type</label>
         <select id="orgType" name="orgType" required>
-          <option value="" selected disabled>Выберите тип</option>
-          <option value="clinic">Клиника</option>
-          <option value="hospital">Больница</option>
-          <option value="investor">Инвестор</option>
+          <option value="" selected disabled>Select type</option>
+          <option value="clinic">Clinic</option>
+          <option value="hospital">Hospital</option>
+          <option value="investor">Investor</option>
         </select>
       </div>
       <div class="demo-field">
-        <label for="orgName">Название учреждения</label>
-        <input id="orgName" name="orgName" type="text" placeholder="Например, MedCare Алматы" required>
+        <label for="orgName">Organization Name</label>
+        <input id="orgName" name="orgName" type="text" placeholder="For example, MedCare Almaty" required>
       </div>
       <div class="demo-field">
-        <label for="fullName">Ваше имя</label>
-        <input id="fullName" name="fullName" type="text" placeholder="Имя и фамилия" required>
+        <label for="fullName">Your Name</label>
+        <input id="fullName" name="fullName" type="text" placeholder="First and last name" required>
       </div>
       <div class="demo-field">
-        <label for="position">Должность</label>
-        <input id="position" name="position" type="text" placeholder="Главврач, заведующий отделением и т.д.">
+        <label for="position">Position</label>
+        <input id="position" name="position" type="text" placeholder="Chief physician, department head, etc.">
       </div>
       <div class="demo-field">
-        <label for="workEmail">Рабочий email</label>
+        <label for="workEmail">Work Email</label>
         <input id="workEmail" name="workEmail" type="email" placeholder="name@clinic.kz" required>
       </div>
       <div class="demo-field">
-        <label for="phone">Телефон</label>
+        <label for="phone">Phone</label>
         <input id="phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
       </div>
       <div class="demo-field full">
-        <label for="message">Комментарий</label>
-        <textarea id="message" name="message" placeholder="Сколько кабинетов эндоскопии у вас сейчас?"></textarea>
+        <label for="message">Comment</label>
+        <textarea id="message" name="message" placeholder="How many endoscopy rooms do you currently have?"></textarea>
       </div>
-      <p class="demo-form-note">Нажимая «Отправить запрос», вы соглашаетесь на обработку контактных данных для связи.</p>
+      <p class="demo-form-note">By clicking "Submit Request", you agree to the processing of your contact details for communication purposes.</p>
       <div class="demo-form-actions">
-        <button type="button" class="btn-modal-secondary" id="cancelDemoModal">Отмена</button>
-        <button type="submit" class="btn-modal-primary">Отправить запрос</button>
+        <button type="button" class="btn-modal-secondary" id="cancelDemoModal">Cancel</button>
+        <button type="submit" class="btn-modal-primary">Submit Request</button>
       </div>
     </form>
   </div>
@@ -1618,12 +1597,12 @@ footer { background: rgba(255,255,255,0.72); color: var(--text-muted); padding: 
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="brand">colo.ai</div>
-      <p>© 2026 Colo.ai Technologies. Все права защищены.</p>
+      <p>© 2026 Colo.ai Technologies. All rights reserved.</p>
     </div>
     <div class="footer-links">
-      <a href="privacy.html">Политика конфиденциальности</a>
-      <a href="term.html">Условия использования</a>
-      <a href="#">Контакты</a>
+      <a href="privacy-en.html">Privacy Policy</a>
+      <a href="term-en.html">Terms of Use</a>
+      <a href="#">Contact</a>
     </div>
   </div>
 </footer>
@@ -2044,25 +2023,17 @@ function renderFrame(index) {
   ctx.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);
 }
 const scrollContainer = document.getElementById('animation-trigger');
-const mainHero = document.querySelector('.main-hero');
 const cards = [
   { el: document.getElementById('card-1'), start: 0.05, end: 0.3 },
   { el: document.getElementById('card-2'), start: 0.35, end: 0.6 },
   { el: document.getElementById('card-3'), start: 0.65, end: 0.95 }
 ];
-const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
 let lastScrollY = window.scrollY;
 window.addEventListener('scroll', () => {
-  const rect = scrollContainer.getBoundingClientRect();
   const topOffset = scrollContainer.offsetTop;
   const totalHeight = scrollContainer.offsetHeight - window.innerHeight;
   const currentScrollY = window.scrollY;
-  const scrollingUp = currentScrollY < lastScrollY;
-  const enterProgress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight * 0.9)));
-  const seamOpacity = Math.pow(Math.max(0, Math.sin(enterProgress * Math.PI)), 1.15);
-  if (mainHero) {
-    mainHero.style.setProperty('--hero-seam-opacity', seamOpacity.toFixed(3));
-  }
   let fraction = (window.scrollY - topOffset) / totalHeight;
   
   fraction = Math.max(0, Math.min(1, fraction));
@@ -2073,19 +2044,11 @@ window.addEventListener('scroll', () => {
     requestAnimationFrame(() => renderFrame(currentFrameIndex));
   }
   
-  const cardTimings = isMobile ? [
-    { start: 0.01, end: 0.42 },
-    { start: 0.24, end: 0.68 },
-    { start: 0.5, end: 0.98 }
-  ] : cards;
-
-  cards.forEach((card, index) => {
-    const timing = cardTimings[index];
-    if (fraction >= timing.start && fraction <= timing.end) card.el.classList.add('active');
+  cards.forEach(card => {
+    if (fraction >= card.start && fraction <= card.end) card.el.classList.add('active');
     else card.el.classList.remove('active');
   });
   
-  const nav = document.getElementById('navbar');
   const triggerStart = topOffset - (window.innerHeight / 10);
   const triggerEnd = topOffset + scrollContainer.offsetHeight + (window.innerHeight / 100);
   if (window.scrollY > triggerStart && window.scrollY < triggerEnd) {
@@ -2183,7 +2146,7 @@ demoForm.addEventListener('submit', (event) => {
   const formData = new FormData(demoForm);
   const payload = Object.fromEntries(formData.entries());
   console.log('Demo request:', payload);
-  alert('Спасибо! Заявка принята. Мы свяжемся с вами в ближайшее время.');
+  alert('Thank you! Your request has been received. We will contact you shortly.');
   demoForm.reset();
   closeModal();
 });

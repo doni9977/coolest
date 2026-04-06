@@ -55,6 +55,19 @@ h1, h2, h3, .brand { font-family: 'Unbounded', sans-serif; }
   letter-spacing: 1.5px;
 }
 .nav-links a:hover { color: var(--accent); }
+.nav-lang {
+  border: 1px solid rgba(19,114,196,0.18);
+  color: var(--accent) !important;
+  background: rgba(19,114,196,0.04) !important;
+  padding: 0.45rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.72rem !important;
+  letter-spacing: 1px !important;
+  text-transform: none !important;
+}
+.nav-lang:hover {
+  background: rgba(19,114,196,0.09) !important;
+}
 .legal-container {
   max-width: 800px;
   margin: 10rem auto 6rem;
@@ -85,7 +98,9 @@ footer { background: var(--bg-alt); color: var(--text-muted); padding: 4rem 2rem
 .footer-links a:hover { color: var(--accent); }
 @media (max-width: 768px) {
   .navbar { padding: 0.8rem 1rem; }
-  .nav-links { display: none; }
+  .nav-links { display: flex; gap: 0.45rem; margin-left: auto; }
+  .nav-links a:not(.nav-lang) { display: none; }
+  .nav-lang { padding: 0.4rem 0.7rem; font-size: 0.66rem !important; }
   .legal-container { margin-top: 6rem; }
   .legal-container h1 { font-size: 2rem; }
   .footer-inner { flex-direction: column; text-align: center; }
@@ -99,6 +114,8 @@ footer { background: var(--bg-alt); color: var(--text-muted); padding: 4rem 2rem
   <div class="nav-links">
     <a href="index.html#problem">ПРОБЛЕМА</a>
     <a href="index.html#solution">РЕШЕНИЕ</a>
+    <a href="term-en.html" class="nav-lang">EN</a>
+    <a href="term.html" class="nav-lang">RU</a>
   </div>
 </nav>
 
