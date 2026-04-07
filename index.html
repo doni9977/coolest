@@ -534,6 +534,13 @@ canvas {
   height: 100%;
   object-fit: cover;
 }
+.mobile-scroll-video::-webkit-media-controls,
+.mobile-scroll-video::-webkit-media-controls-enclosure,
+.mobile-scroll-video::-webkit-media-controls-start-playback-button,
+.mobile-scroll-video::-webkit-media-controls-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
 .cards-container {
   position: absolute;
   inset: 0;
@@ -1839,10 +1846,17 @@ function startMobileScrollVideo() {
   mobileScrollVideo.muted = true;
   mobileScrollVideo.defaultMuted = true;
   mobileScrollVideo.loop = true;
+  mobileScrollVideo.autoplay = true;
   mobileScrollVideo.playsInline = true;
+  mobileScrollVideo.controls = false;
+  mobileScrollVideo.disablePictureInPicture = true;
+  mobileScrollVideo.removeAttribute('controls');
+  mobileScrollVideo.setAttribute('autoplay', '');
   mobileScrollVideo.setAttribute('muted', '');
   mobileScrollVideo.setAttribute('playsinline', '');
   mobileScrollVideo.setAttribute('webkit-playsinline', 'true');
+  mobileScrollVideo.setAttribute('disablePictureInPicture', '');
+  mobileScrollVideo.setAttribute('controlsList', 'nodownload nofullscreen noplaybackrate');
   mobileScrollVideo.play().catch(() => {});
 }
 
